@@ -9,3 +9,4 @@ Website/.wrangler/
 .env
 .env.*
 work/
+build/
