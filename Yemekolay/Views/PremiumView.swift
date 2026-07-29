@@ -63,8 +63,8 @@ struct PremiumView: View {
                         Task { await purchaseManager.restore() }
                     }
 
-                    Link("Kullanım Koşulları", destination: URL(string: "https://saybir.net/yemekolay/terms")!)
-                    Link("Gizlilik Politikası", destination: URL(string: "https://saybir.net/yemekolay/privacy")!)
+                    Link("Kullanım Koşulları", destination: URL(string: "https://yemekolay-destek.saax-444.chatgpt.site/terms")!)
+                    Link("Gizlilik Politikası", destination: URL(string: "https://yemekolay-destek.saax-444.chatgpt.site/privacy")!)
                 }
                 .padding()
             }
