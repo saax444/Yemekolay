@@ -1,0 +1,10 @@
+.DS_Store
+xcuserdata/
+DerivedData/
+*.xcuserstate
+Website/node_modules/
+Website/.next/
+Website/dist/
+Website/.wrangler/
+.env
+.env.*

@@ -1,0 +1,316 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00000000000000000000044C /* YemekolayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000064 /* YemekolayApp.swift */; };
+		00000000000000000000044D /* Models/Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000065 /* Models/Ingredient.swift */; };
+		00000000000000000000044E /* Models/Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000066 /* Models/Recipe.swift */; };
+		00000000000000000000044F /* Models/RecipeMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000067 /* Models/RecipeMatch.swift */; };
+		000000000000000000000450 /* Services/SearchNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000068 /* Services/SearchNormalizer.swift */; };
+		000000000000000000000451 /* Services/AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000069 /* Services/AppState.swift */; };
+		000000000000000000000452 /* Services/PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000006A /* Services/PurchaseManager.swift */; };
+		000000000000000000000453 /* Services/AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000006B /* Services/AdManager.swift */; };
+		000000000000000000000900 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 000000000000000000000902 /* GoogleMobileAds */; };
+		000000000000000000000454 /* Views/GlassComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000006C /* Views/GlassComponents.swift */; };
+		000000000000000000000455 /* Views/RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000006D /* Views/RootTabView.swift */; };
+		000000000000000000000456 /* Views/HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000006E /* Views/HomeView.swift */; };
+		000000000000000000000457 /* Views/IngredientPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000006F /* Views/IngredientPickerView.swift */; };
+		000000000000000000000458 /* Views/RecipeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000070 /* Views/RecipeResultsView.swift */; };
+		000000000000000000000459 /* Views/RecipeGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000071 /* Views/RecipeGateView.swift */; };
+		00000000000000000000045A /* Views/RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000072 /* Views/RecipeDetailView.swift */; };
+		00000000000000000000045B /* Views/RandomSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000073 /* Views/RandomSuggestionView.swift */; };
+		00000000000000000000045C /* Views/FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000074 /* Views/FavoritesView.swift */; };
+		00000000000000000000045D /* Views/PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000075 /* Views/PremiumView.swift */; };
+		00000000000000000000045E /* Views/SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000076 /* Views/SettingsView.swift */; };
+		000000000000000000000514 /* Resources/ingredients.json in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000012C /* Resources/ingredients.json */; };
+		000000000000000000000515 /* Resources/recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000012D /* Resources/recipes.json */; };
+		000000000000000000000516 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000012E /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		000000000000000000000005 /* Yemekolay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yemekolay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		000000000000000000000064 /* YemekolayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YemekolayApp.swift; sourceTree = "<group>"; };
+		000000000000000000000065 /* Models/Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/Ingredient.swift; sourceTree = "<group>"; };
+		000000000000000000000066 /* Models/Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/Recipe.swift; sourceTree = "<group>"; };
+		000000000000000000000067 /* Models/RecipeMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/RecipeMatch.swift; sourceTree = "<group>"; };
+		000000000000000000000068 /* Services/SearchNormalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/SearchNormalizer.swift; sourceTree = "<group>"; };
+		000000000000000000000069 /* Services/AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/AppState.swift; sourceTree = "<group>"; };
+		00000000000000000000006A /* Services/PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/PurchaseManager.swift; sourceTree = "<group>"; };
+		00000000000000000000006B /* Services/AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/AdManager.swift; sourceTree = "<group>"; };
+		00000000000000000000006C /* Views/GlassComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/GlassComponents.swift; sourceTree = "<group>"; };
+		00000000000000000000006D /* Views/RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/RootTabView.swift; sourceTree = "<group>"; };
+		00000000000000000000006E /* Views/HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/HomeView.swift; sourceTree = "<group>"; };
+		00000000000000000000006F /* Views/IngredientPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/IngredientPickerView.swift; sourceTree = "<group>"; };
+		000000000000000000000070 /* Views/RecipeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/RecipeResultsView.swift; sourceTree = "<group>"; };
+		000000000000000000000071 /* Views/RecipeGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/RecipeGateView.swift; sourceTree = "<group>"; };
+		000000000000000000000072 /* Views/RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/RecipeDetailView.swift; sourceTree = "<group>"; };
+		000000000000000000000073 /* Views/RandomSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/RandomSuggestionView.swift; sourceTree = "<group>"; };
+		000000000000000000000074 /* Views/FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/FavoritesView.swift; sourceTree = "<group>"; };
+		000000000000000000000075 /* Views/PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/PremiumView.swift; sourceTree = "<group>"; };
+		000000000000000000000076 /* Views/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/SettingsView.swift; sourceTree = "<group>"; };
+		00000000000000000000012C /* Resources/ingredients.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Resources/ingredients.json; sourceTree = "<group>"; };
+		00000000000000000000012D /* Resources/recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Resources/recipes.json; sourceTree = "<group>"; };
+		00000000000000000000012E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		00000000000000000000015E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		000000000000000000000008 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000000900 /* GoogleMobileAds in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		000000000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000004 /* Yemekolay */,
+				000000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		000000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000005 /* Yemekolay.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		000000000000000000000004 /* Yemekolay */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000000064 /* YemekolayApp.swift */,
+				000000000000000000000065 /* Models/Ingredient.swift */,
+				000000000000000000000066 /* Models/Recipe.swift */,
+				000000000000000000000067 /* Models/RecipeMatch.swift */,
+				000000000000000000000068 /* Services/SearchNormalizer.swift */,
+				000000000000000000000069 /* Services/AppState.swift */,
+				00000000000000000000006A /* Services/PurchaseManager.swift */,
+				00000000000000000000006B /* Services/AdManager.swift */,
+				00000000000000000000006C /* Views/GlassComponents.swift */,
+				00000000000000000000006D /* Views/RootTabView.swift */,
+				00000000000000000000006E /* Views/HomeView.swift */,
+				00000000000000000000006F /* Views/IngredientPickerView.swift */,
+				000000000000000000000070 /* Views/RecipeResultsView.swift */,
+				000000000000000000000071 /* Views/RecipeGateView.swift */,
+				000000000000000000000072 /* Views/RecipeDetailView.swift */,
+				000000000000000000000073 /* Views/RandomSuggestionView.swift */,
+				000000000000000000000074 /* Views/FavoritesView.swift */,
+				000000000000000000000075 /* Views/PremiumView.swift */,
+				000000000000000000000076 /* Views/SettingsView.swift */,
+				00000000000000000000012C /* Resources/ingredients.json */,
+				00000000000000000000012D /* Resources/recipes.json */,
+				00000000000000000000012E /* Assets.xcassets */,
+				00000000000000000000015E /* Info.plist */,
+			);
+			path = Yemekolay;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		000000000000000000000009 /* Yemekolay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00000000000000000000000B /* Build configuration list for PBXNativeTarget "Yemekolay" */;
+			buildPhases = (
+				000000000000000000000006 /* Sources */,
+				000000000000000000000008 /* Frameworks */,
+				000000000000000000000007 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Yemekolay;
+			productName = Yemekolay;
+			productReference = 000000000000000000000005 /* Yemekolay.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		000000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					000000000000000000000009 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = 00000000000000000000000A /* Build configuration list for PBXProject "Yemekolay" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = tr;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				tr,
+				Base,
+			);
+			mainGroup = 000000000000000000000002;
+			packageReferences = (
+				000000000000000000000901 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
+			productRefGroup = 000000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				000000000000000000000009 /* Yemekolay */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		000000000000000000000007 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000000514 /* Resources/ingredients.json in Resources */,
+				000000000000000000000515 /* Resources/recipes.json in Resources */,
+				000000000000000000000516 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		000000000000000000000006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00000000000000000000044C /* YemekolayApp.swift in Sources */,
+				00000000000000000000044D /* Models/Ingredient.swift in Sources */,
+				00000000000000000000044E /* Models/Recipe.swift in Sources */,
+				00000000000000000000044F /* Models/RecipeMatch.swift in Sources */,
+				000000000000000000000450 /* Services/SearchNormalizer.swift in Sources */,
+				000000000000000000000451 /* Services/AppState.swift in Sources */,
+				000000000000000000000452 /* Services/PurchaseManager.swift in Sources */,
+				000000000000000000000453 /* Services/AdManager.swift in Sources */,
+				000000000000000000000454 /* Views/GlassComponents.swift in Sources */,
+				000000000000000000000455 /* Views/RootTabView.swift in Sources */,
+				000000000000000000000456 /* Views/HomeView.swift in Sources */,
+				000000000000000000000457 /* Views/IngredientPickerView.swift in Sources */,
+				000000000000000000000458 /* Views/RecipeResultsView.swift in Sources */,
+				000000000000000000000459 /* Views/RecipeGateView.swift in Sources */,
+				00000000000000000000045A /* Views/RecipeDetailView.swift in Sources */,
+				00000000000000000000045B /* Views/RandomSuggestionView.swift in Sources */,
+				00000000000000000000045C /* Views/FavoritesView.swift in Sources */,
+				00000000000000000000045D /* Views/PremiumView.swift in Sources */,
+				00000000000000000000045E /* Views/SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		00000000000000000000000C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		00000000000000000000000D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		00000000000000000000000E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 42Q529H9R4;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Yemekolay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizsaybir.yemekolay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		00000000000000000000000F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 42Q529H9R4;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Yemekolay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azizsaybir.yemekolay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00000000000000000000000A /* Build configuration list for PBXProject "Yemekolay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00000000000000000000000C /* Debug */,
+				00000000000000000000000D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		00000000000000000000000B /* Build configuration list for PBXNativeTarget "Yemekolay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00000000000000000000000E /* Debug */,
+				00000000000000000000000F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		000000000000000000000901 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		000000000000000000000902 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000000000000000000000901 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 000000000000000000000001 /* Project object */;
+}
