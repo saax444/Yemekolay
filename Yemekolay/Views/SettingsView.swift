@@ -13,9 +13,9 @@ struct SettingsView: View {
                 }
 
                 Section("Yasal") {
-                    Link("Gizlilik Politikası", destination: URL(string: "https://yemekolay-destek.saax-444.chatgpt.site/privacy")!)
-                    Link("Kullanım Koşulları", destination: URL(string: "https://yemekolay-destek.saax-444.chatgpt.site/terms")!)
-                    Link("Destek", destination: URL(string: "https://yemekolay-destek.saax-444.chatgpt.site/support")!)
+                    Link("Gizlilik Politikası", destination: URL(string: "https://saax444.github.io/Yemekolay/privacy/")!)
+                    Link("Kullanım Koşulları", destination: URL(string: "https://saax444.github.io/Yemekolay/terms/")!)
+                    Link("Destek", destination: URL(string: "https://saax444.github.io/Yemekolay/support/")!)
                 }
 
                 Section("Uygulama") {

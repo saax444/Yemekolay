@@ -28,6 +28,11 @@ struct HomeView: View {
     private var header: some View {
         GlassCard {
             VStack(alignment: .leading, spacing: 8) {
+                Image("BrandLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 52, height: 52)
+                    .accessibilityLabel("Yemekolay")
                 Text("Evde ne varsa,")
                     .font(.title3.weight(.medium))
                     .foregroundStyle(.secondary)
