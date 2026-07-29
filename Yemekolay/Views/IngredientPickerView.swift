@@ -16,9 +16,11 @@ struct IngredientPickerView: View {
                         appState.toggleIngredient(ingredient)
                     } label: {
                         HStack(spacing: 12) {
-                            Image(systemName: "leaf")
-                                .foregroundStyle(.orange)
-                                .frame(width: 30)
+                            Image(systemName: ingredient.symbolName)
+                                .font(.system(size: 17, weight: .semibold))
+                                .foregroundStyle(iconColor(for: ingredient))
+                                .frame(width: 38, height: 38)
+                                .background(iconColor(for: ingredient).opacity(0.12), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
 
                             VStack(alignment: .leading, spacing: 3) {
                                 Text(ingredient.name)
@@ -64,6 +66,18 @@ struct IngredientPickerView: View {
             .background(.ultraThinMaterial)
         }
         .navigationTitle("Malzemeler")
+    }
+
+    private func iconColor(for ingredient: Ingredient) -> Color {
+        switch ingredient.tintName {
+        case "green": .green
+        case "red": .red
+        case "brown": .brown
+        case "blue": .blue
+        case "yellow": .yellow
+        case "orange": .orange
+        default: .accentColor
+        }
     }
 
     private var searchHeader: some View {

@@ -35,7 +35,7 @@ struct RecipeGateView: View {
                                     .multilineTextAlignment(.center)
                                     .foregroundStyle(.secondary)
 
-                                Button("Tarifi Aç") {
+                                Button(appState.freeUsesRemaining > 0 ? "Ücretsiz Hakkımla Aç" : "Tarifi Aç") {
                                     if appState.canOpenRecipe(isPremium: purchaseManager.isPremium) {
                                         adManager.showInterstitial {
                                             unlocked = true
@@ -47,7 +47,7 @@ struct RecipeGateView: View {
                                 .buttonStyle(.borderedProminent)
                                 .tint(.orange)
 
-                                Button("Reklam İzle ve Tarifi Aç") {
+                                Button(adManager.isRewardedReady ? "Reklam İzle ve Tarifi Aç" : "Reklam Hazırlanıyor…") {
                                     adManager.showRewarded {
                                         appState.grantRewardedRecipe()
                                         _ = appState.canOpenRecipe(isPremium: false)
@@ -55,6 +55,7 @@ struct RecipeGateView: View {
                                     }
                                 }
                                 .buttonStyle(.bordered)
+                                .disabled(!adManager.isRewardedReady)
 
                                 Button("Premium'a Geç") {
                                     showPremium = true

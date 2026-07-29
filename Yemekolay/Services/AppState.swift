@@ -33,19 +33,45 @@ final class AppState: ObservableObject {
 
     var filteredIngredients: [Ingredient] {
         let query = SearchNormalizer.normalize(searchText)
-        let source: [Ingredient]
-
         if query.isEmpty {
-            source = Array(ingredients.prefix(180))
-        } else {
-            source = ingredients.filter { ingredient in
-                SearchNormalizer.normalize(ingredient.name).contains(query) ||
-                ingredient.searchTokens.contains {
-                    SearchNormalizer.normalize($0).contains(query)
-                }
-            }
+            let selected = ingredients.filter { selectedIngredientIDs.contains($0.id) }
+            let remaining = ingredients.filter { !selectedIngredientIDs.contains($0.id) }
+            return Array((selected + remaining).prefix(220))
         }
-        return Array(source.prefix(300))
+
+        let queryWords = query.split(separator: " ").map(String.init)
+        return ingredients.compactMap { ingredient -> (Ingredient, Int)? in
+            let name = SearchNormalizer.normalize(ingredient.name)
+            let tokens = ingredient.searchTokens.map(SearchNormalizer.normalize)
+            let searchable = ([name] + tokens).joined(separator: " ")
+
+            guard queryWords.allSatisfy(searchable.contains) else { return nil }
+
+            let score: Int
+            if name == query {
+                score = 0
+            } else if name.hasPrefix(query) {
+                score = 1
+            } else if tokens.contains(query) {
+                score = 2
+            } else if name.contains(query) {
+                score = 3
+            } else {
+                score = 4
+            }
+            return (ingredient, score)
+        }
+        .sorted {
+            if $0.1 == $1.1 {
+                if $0.0.name.count == $1.0.name.count {
+                    return $0.0.name.localizedCaseInsensitiveCompare($1.0.name) == .orderedAscending
+                }
+                return $0.0.name.count < $1.0.name.count
+            }
+            return $0.1 < $1.1
+        }
+        .prefix(250)
+        .map(\.0)
     }
 
     func toggleIngredient(_ ingredient: Ingredient) {
@@ -136,7 +162,13 @@ final class AppState: ObservableObject {
         switch selectedRandomMode {
         case .cook:
             randomOrderSuggestion = nil
-            randomRecipe = recipes.randomElement()
+            let eligible = recipes.filter {
+                $0.ingredients.count >= 3 &&
+                $0.instructions.count >= 4 &&
+                Set($0.ingredients.map(\.ingredientID)).count == $0.ingredients.count &&
+                $0.id != randomRecipe?.id
+            }
+            randomRecipe = eligible.randomElement() ?? recipes.randomElement()
         case .order:
             randomRecipe = nil
             randomOrderSuggestion = [

@@ -19,7 +19,7 @@ struct PremiumView: View {
                             Text("Yemekolay Premium")
                                 .font(.largeTitle.bold())
 
-                            Text("Sınırsız tarif, reklamsız kullanım ve sınırsız rastgele öneri.")
+                            Text("Tariflere sınırsız eriş, reklamları kaldır ve mutfakta kesintisiz ilerle.")
                                 .multilineTextAlignment(.center)
                                 .foregroundStyle(.secondary)
                         }
@@ -30,9 +30,22 @@ struct PremiumView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             Label("Sınırsız tarif görüntüleme", systemImage: "infinity")
                             Label("Reklamsız kullanım", systemImage: "nosign")
-                            Label("Sınırsız rastgele öneri", systemImage: "dice.fill")
-                            Label("Favori tarifler", systemImage: "heart.fill")
+                            Label("Ödüllü reklam beklemeden tarif açma", systemImage: "bolt.fill")
+                            Label("Tüm tarif kütüphanesine kesintisiz erişim", systemImage: "books.vertical.fill")
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+
+                    GlassCard {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Ücretsiz sürüm")
+                                .font(.headline)
+                            Label("Her gün 1 ücretsiz tarif detayı", systemImage: "1.circle.fill")
+                            Label("Reklam izleyerek ek tarif hakkı", systemImage: "play.rectangle.fill")
+                            Label("Malzeme arama, öneriler ve favoriler", systemImage: "checkmark.circle.fill")
+                        }
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
 

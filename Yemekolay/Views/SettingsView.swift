@@ -21,7 +21,7 @@ struct SettingsView: View {
                 Section("Uygulama") {
                     LabeledContent("Dil", value: "Türkçe")
                     LabeledContent("Sürüm", value: "1.0")
-                    LabeledContent("Malzeme", value: "3.200")
+                    LabeledContent("Malzeme", value: "1.062")
                     LabeledContent("Tarif", value: "1.000")
                 }
             }
