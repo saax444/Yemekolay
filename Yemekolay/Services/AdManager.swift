@@ -1,6 +1,7 @@
 import GoogleMobileAds
 import SwiftUI
 import UIKit
+import UserMessagingPlatform
 
 enum AdConfiguration {
 #if DEBUG
@@ -21,6 +22,8 @@ enum AdConfiguration {
 final class AdManager: NSObject, ObservableObject, FullScreenContentDelegate {
     @Published private(set) var isInterstitialReady = false
     @Published private(set) var isRewardedReady = false
+    @Published private(set) var privacyOptionsRequired = false
+    @Published private(set) var consentErrorMessage: String?
 
     private var interstitial: InterstitialAd?
     private var rewarded: RewardedAd?
@@ -28,12 +31,48 @@ final class AdManager: NSObject, ObservableObject, FullScreenContentDelegate {
     private var sessionStartedAt = Date()
     private var completedInterstitial: (() -> Void)?
     private var completedReward: (() -> Void)?
+    private var adsStarted = false
 
     private let minimumInterstitialInterval: TimeInterval = AdConfiguration.isTestMode ? 0 : 300
     private let firstSessionGracePeriod: TimeInterval = AdConfiguration.isTestMode ? 0 : 120
 
     override init() {
         super.init()
+    }
+
+    func configureConsentAndAds() async {
+        let parameters = RequestParameters()
+#if DEBUG
+        let debugSettings = DebugSettings()
+        debugSettings.geography = .EEA
+        parameters.debugSettings = debugSettings
+#endif
+
+        do {
+            try await ConsentInformation.shared.requestConsentInfoUpdate(with: parameters)
+            try await ConsentForm.loadAndPresentIfRequired(from: nil)
+        } catch {
+            consentErrorMessage = error.localizedDescription
+        }
+
+        privacyOptionsRequired = ConsentInformation.shared.privacyOptionsRequirementStatus == .required
+        if ConsentInformation.shared.canRequestAds {
+            startAdsIfNeeded()
+        }
+    }
+
+    func presentPrivacyOptions() async {
+        do {
+            try await ConsentForm.presentPrivacyOptionsForm(from: nil)
+            privacyOptionsRequired = ConsentInformation.shared.privacyOptionsRequirementStatus == .required
+        } catch {
+            consentErrorMessage = error.localizedDescription
+        }
+    }
+
+    private func startAdsIfNeeded() {
+        guard !adsStarted else { return }
+        adsStarted = true
         MobileAds.shared.start()
         loadInterstitial()
         loadRewarded()

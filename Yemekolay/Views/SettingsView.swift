@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject private var purchaseManager: PurchaseManager
+    @EnvironmentObject private var adManager: AdManager
 
     var body: some View {
         ZStack {
@@ -22,6 +23,11 @@ struct SettingsView: View {
                         Link("Gizlilik Politikası", destination: URL(string: "https://saax444.github.io/Yemekolay/privacy/")!)
                         Link("Kullanım Koşulları", destination: URL(string: "https://saax444.github.io/Yemekolay/terms/")!)
                         Link("Destek", destination: URL(string: "https://saax444.github.io/Yemekolay/support/")!)
+                        if adManager.privacyOptionsRequired {
+                            Button("Reklam Gizlilik Tercihleri") {
+                                Task { await adManager.presentPrivacyOptions() }
+                            }
+                        }
                     }
 
                     Section("Uygulama") {

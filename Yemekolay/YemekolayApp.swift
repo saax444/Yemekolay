@@ -14,6 +14,7 @@ struct YemekolayApp: App {
                 .environmentObject(adManager)
                 .task {
                     appState.loadDataIfNeeded()
+                    await adManager.configureConsentAndAds()
                     await purchaseManager.loadProducts()
                     await purchaseManager.updatePurchasedProducts()
                 }

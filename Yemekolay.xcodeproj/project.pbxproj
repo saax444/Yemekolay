@@ -30,6 +30,7 @@
 		000000000000000000000514 /* Resources/ingredients.json in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000012C /* Resources/ingredients.json */; };
 		000000000000000000000515 /* Resources/recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000012D /* Resources/recipes.json */; };
 		000000000000000000000516 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000012E /* Assets.xcassets */; };
+		000000000000000000000517 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000012F /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		00000000000000000000012D /* Resources/recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Resources/recipes.json; sourceTree = "<group>"; };
 		00000000000000000000012E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00000000000000000000015E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00000000000000000000012F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				00000000000000000000012D /* Resources/recipes.json */,
 				00000000000000000000012E /* Assets.xcassets */,
 				00000000000000000000015E /* Info.plist */,
+				00000000000000000000012F /* PrivacyInfo.xcprivacy */,
 			);
 			path = Yemekolay;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				000000000000000000000514 /* Resources/ingredients.json in Resources */,
 				000000000000000000000515 /* Resources/recipes.json in Resources */,
 				000000000000000000000516 /* Assets.xcassets in Resources */,
+				000000000000000000000517 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
