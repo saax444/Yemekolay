@@ -36,6 +36,7 @@ struct RandomSuggestionView: View {
 
                     if !purchaseManager.isPremium {
                         BannerAdArea()
+                            .frame(height: 50)
                     }
                 }
                 .padding()

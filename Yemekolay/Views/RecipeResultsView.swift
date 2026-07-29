@@ -59,6 +59,7 @@ struct RecipeResultsView: View {
 
                         if !purchaseManager.isPremium, index == 4 {
                             BannerAdArea()
+                                .frame(height: 50)
                                 .listRowBackground(Color.clear)
                                 .listRowInsets(EdgeInsets())
                                 .padding(.vertical, 8)

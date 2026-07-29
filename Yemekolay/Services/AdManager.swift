@@ -3,9 +3,18 @@ import SwiftUI
 import UIKit
 
 enum AdConfiguration {
+#if DEBUG
+    // Google'ın resmi demo birimleri yalnızca geliştirme ve simülatör testlerinde kullanılır.
+    static let bannerID = "ca-app-pub-3940256099942544/2934735716"
+    static let interstitialID = "ca-app-pub-3940256099942544/4411468910"
+    static let rewardedID = "ca-app-pub-3940256099942544/1712485313"
+    static let isTestMode = true
+#else
     static let bannerID = "ca-app-pub-3233573743391367/4445190199"
     static let interstitialID = "ca-app-pub-3233573743391367/9437662425"
     static let rewardedID = "ca-app-pub-3233573743391367/7825886210"
+    static let isTestMode = false
+#endif
 }
 
 @MainActor
@@ -20,8 +29,8 @@ final class AdManager: NSObject, ObservableObject, FullScreenContentDelegate {
     private var completedInterstitial: (() -> Void)?
     private var completedReward: (() -> Void)?
 
-    private let minimumInterstitialInterval: TimeInterval = 300
-    private let firstSessionGracePeriod: TimeInterval = 120
+    private let minimumInterstitialInterval: TimeInterval = AdConfiguration.isTestMode ? 0 : 300
+    private let firstSessionGracePeriod: TimeInterval = AdConfiguration.isTestMode ? 0 : 120
 
     override init() {
         super.init()
@@ -88,10 +97,13 @@ final class AdManager: NSObject, ObservableObject, FullScreenContentDelegate {
         InterstitialAd.load(
             with: AdConfiguration.interstitialID,
             request: Request()
-        ) { [weak self] ad, _ in
+        ) { [weak self] ad, error in
             Task { @MainActor in
                 self?.interstitial = ad
                 self?.isInterstitialReady = ad != nil
+#if DEBUG
+                if let error { print("Geçiş reklamı yüklenemedi: \(error.localizedDescription)") }
+#endif
             }
         }
     }
@@ -100,10 +112,13 @@ final class AdManager: NSObject, ObservableObject, FullScreenContentDelegate {
         RewardedAd.load(
             with: AdConfiguration.rewardedID,
             request: Request()
-        ) { [weak self] ad, _ in
+        ) { [weak self] ad, error in
             Task { @MainActor in
                 self?.rewarded = ad
                 self?.isRewardedReady = ad != nil
+#if DEBUG
+                if let error { print("Ödüllü reklam yüklenemedi: \(error.localizedDescription)") }
+#endif
             }
         }
     }
@@ -134,5 +149,13 @@ struct BannerAdArea: UIViewRepresentable {
 
     func updateUIView(_ uiView: BannerView, context: Context) {
         uiView.rootViewController = AdManager.topViewController
+    }
+
+    func sizeThatFits(
+        _ proposal: ProposedViewSize,
+        uiView: BannerView,
+        context: Context
+    ) -> CGSize? {
+        CGSize(width: min(proposal.width ?? 320, 320), height: 50)
     }
 }

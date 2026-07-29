@@ -44,6 +44,7 @@ struct IngredientPickerView: View {
 
                 if !purchaseManager.isPremium {
                     BannerAdArea()
+                        .frame(height: 50)
                         .padding(.horizontal)
                         .padding(.bottom, 8)
                 }
