@@ -10,12 +10,18 @@ final class AppState: ObservableObject {
     @Published var selectedRandomMode: RandomMode = .cook
     @Published var randomRecipe: Recipe?
     @Published var randomOrderSuggestion: String?
+    @Published var pantryIngredientIDs: Set<String> = []
+    @Published var weeklyPlan: [Int: String] = [:]
+    @Published var checkedShoppingItems: Set<String> = []
 
     private let defaults = UserDefaults.standard
     private let usageDateKey = "usage.date"
     private let usageCountKey = "usage.count"
     private let rewardCountKey = "usage.reward"
     private let favoritesKey = "favorites"
+    private let pantryKey = "pantry.ingredients"
+    private let weeklyPlanKey = "mealPlan.week"
+    private let shoppingChecksKey = "shopping.checked"
 
     enum RandomMode: String, CaseIterable, Identifiable {
         case cook = "Bugün Ne Pişirsem?"
@@ -28,6 +34,9 @@ final class AppState: ObservableObject {
         ingredients = Bundle.main.decode([Ingredient].self, from: "ingredients.json")
         recipes = Bundle.main.decode([Recipe].self, from: "recipes.json")
         favoriteRecipeIDs = Set(defaults.stringArray(forKey: favoritesKey) ?? [])
+        pantryIngredientIDs = Set(defaults.stringArray(forKey: pantryKey) ?? [])
+        checkedShoppingItems = Set(defaults.stringArray(forKey: shoppingChecksKey) ?? [])
+        weeklyPlan = Self.decodePlan(defaults.dictionary(forKey: weeklyPlanKey) ?? [:])
         resetDailyUsageIfNeeded()
     }
 
@@ -129,6 +138,64 @@ final class AppState: ObservableObject {
         recipes.filter { favoriteRecipeIDs.contains($0.id) }
     }
 
+    func togglePantryIngredient(_ ingredient: Ingredient) {
+        if pantryIngredientIDs.contains(ingredient.id) {
+            pantryIngredientIDs.remove(ingredient.id)
+        } else {
+            pantryIngredientIDs.insert(ingredient.id)
+        }
+        defaults.set(Array(pantryIngredientIDs), forKey: pantryKey)
+    }
+
+    func addToPlan(_ recipe: Recipe, day: Int) {
+        weeklyPlan[day] = recipe.id
+        savePlan()
+    }
+
+    func removeFromPlan(day: Int) {
+        weeklyPlan.removeValue(forKey: day)
+        savePlan()
+    }
+
+    func plannedRecipe(for day: Int) -> Recipe? {
+        guard let id = weeklyPlan[day] else { return nil }
+        return recipes.first { $0.id == id }
+    }
+
+    var shoppingItems: [RecipeIngredient] {
+        var grouped: [String: RecipeIngredient] = [:]
+        for recipeID in Set(weeklyPlan.values) {
+            guard let recipe = recipes.first(where: { $0.id == recipeID }) else { continue }
+            for item in recipe.ingredients where !pantryIngredientIDs.contains(item.ingredientID) {
+                if let existing = grouped[item.ingredientID] {
+                    grouped[item.ingredientID] = RecipeIngredient(
+                        ingredientID: item.ingredientID,
+                        name: item.name,
+                        amount: existing.amount + " + " + item.amount
+                    )
+                } else {
+                    grouped[item.ingredientID] = item
+                }
+            }
+        }
+        return grouped.values.sorted {
+            $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
+        }
+    }
+
+    func toggleShoppingItem(_ item: RecipeIngredient) {
+        if checkedShoppingItems.contains(item.ingredientID) {
+            checkedShoppingItems.remove(item.ingredientID)
+        } else {
+            checkedShoppingItems.insert(item.ingredientID)
+        }
+        defaults.set(Array(checkedShoppingItems), forKey: shoppingChecksKey)
+    }
+
+    func usePantryForRecipeSearch() {
+        selectedIngredientIDs = pantryIngredientIDs
+    }
+
     var freeUsesRemaining: Int {
         resetDailyUsageIfNeeded()
         return max(0, 1 - defaults.integer(forKey: usageCountKey))
@@ -203,6 +270,22 @@ final class AppState: ObservableObject {
             defaults.set(0, forKey: usageCountKey)
             defaults.set(0, forKey: rewardCountKey)
         }
+    }
+
+    private func savePlan() {
+        defaults.set(Dictionary(uniqueKeysWithValues: weeklyPlan.map {
+            (String($0.key), $0.value)
+        }), forKey: weeklyPlanKey)
+        let validIDs = Set(shoppingItems.map(\.ingredientID))
+        checkedShoppingItems.formIntersection(validIDs)
+        defaults.set(Array(checkedShoppingItems), forKey: shoppingChecksKey)
+    }
+
+    private static func decodePlan(_ dictionary: [String: Any]) -> [Int: String] {
+        Dictionary(uniqueKeysWithValues: dictionary.compactMap { key, value in
+            guard let day = Int(key), let recipeID = value as? String else { return nil }
+            return (day, recipeID)
+        })
     }
 }
 

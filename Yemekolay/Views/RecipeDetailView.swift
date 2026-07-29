@@ -4,6 +4,13 @@ struct RecipeDetailView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var purchaseManager: PurchaseManager
     let recipe: Recipe
+    @State private var servingCount: Int
+    @State private var showPremium = false
+
+    init(recipe: Recipe) {
+        self.recipe = recipe
+        _servingCount = State(initialValue: recipe.servings)
+    }
 
     var body: some View {
         ZStack {
@@ -28,6 +35,27 @@ struct RecipeDetailView: View {
                         .font(.subheadline)
                     }
 
+                    GlassCard {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 3) {
+                                Label("Porsiyon", systemImage: "person.2.fill")
+                                    .font(.headline)
+                                Text(purchaseManager.isPremium ? "Ölçüler otomatik hesaplanır" : "Premium ile ölçüleri otomatik ayarla")
+                                    .font(.caption).foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            Stepper("\(servingCount)", value: $servingCount, in: 1...12)
+                                .labelsHidden()
+                                .disabled(!purchaseManager.isPremium)
+                            Text("\(servingCount) kişilik")
+                                .font(.subheadline.weight(.semibold))
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            if !purchaseManager.isPremium { showPremium = true }
+                        }
+                    }
+
                     Button {
                         appState.toggleFavorite(recipe)
                     } label: {
@@ -50,7 +78,7 @@ struct RecipeDetailView: View {
                                         .foregroundStyle(.orange)
                                     Text(item.name)
                                     Spacer()
-                                    Text(item.amount)
+                                    Text(scaledAmount(item.amount))
                                         .foregroundStyle(.secondary)
                                 }
                             }
@@ -103,14 +131,38 @@ struct RecipeDetailView: View {
                         }
                     }
 
-                    if !purchaseManager.isPremium {
-                        BannerAdArea()
-                    }
                 }
                 .padding()
             }
         }
         .navigationTitle(recipe.name)
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showPremium) {
+            NavigationStack { PremiumView() }
+        }
+    }
+
+    private func scaledAmount(_ amount: String) -> String {
+        guard servingCount != recipe.servings, recipe.servings > 0 else { return amount }
+        let ratio = Double(servingCount) / Double(recipe.servings)
+        let pattern = #"^(\d+(?:[.,]\d+)?|\d+/\d+)"#
+        guard let regex = try? NSRegularExpression(pattern: pattern),
+              let match = regex.firstMatch(in: amount, range: NSRange(amount.startIndex..., in: amount)),
+              let range = Range(match.range(at: 1), in: amount) else { return amount }
+        let raw = String(amount[range]).replacingOccurrences(of: ",", with: ".")
+        let value: Double
+        if raw.contains("/") {
+            let parts = raw.split(separator: "/").compactMap { Double($0) }
+            guard parts.count == 2, parts[1] != 0 else { return amount }
+            value = parts[0] / parts[1]
+        } else {
+            guard let parsed = Double(raw) else { return amount }
+            value = parsed
+        }
+        let scaled = value * ratio
+        let formatted = scaled.rounded() == scaled
+            ? String(Int(scaled))
+            : String(format: "%.1f", scaled).replacingOccurrences(of: ".", with: ",")
+        return formatted + amount[range.upperBound...]
     }
 }

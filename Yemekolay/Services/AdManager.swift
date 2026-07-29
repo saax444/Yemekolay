@@ -16,10 +16,12 @@ final class AdManager: NSObject, ObservableObject, FullScreenContentDelegate {
     private var interstitial: InterstitialAd?
     private var rewarded: RewardedAd?
     private var lastInterstitialDate: Date?
+    private var sessionStartedAt = Date()
     private var completedInterstitial: (() -> Void)?
     private var completedReward: (() -> Void)?
 
-    private let minimumInterstitialInterval: TimeInterval = 180
+    private let minimumInterstitialInterval: TimeInterval = 300
+    private let firstSessionGracePeriod: TimeInterval = 120
 
     override init() {
         super.init()
@@ -32,6 +34,7 @@ final class AdManager: NSObject, ObservableObject, FullScreenContentDelegate {
         guard
             let ad = interstitial,
             let presenter = Self.topViewController,
+            Date().timeIntervalSince(sessionStartedAt) >= firstSessionGracePeriod,
             lastInterstitialDate.map({ Date().timeIntervalSince($0) >= minimumInterstitialInterval }) ?? true
         else {
             completion()

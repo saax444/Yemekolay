@@ -19,7 +19,7 @@ struct PremiumView: View {
                             Text("Yemekolay Premium")
                                 .font(.largeTitle.bold())
 
-                            Text("Tariflere sınırsız eriş, reklamları kaldır ve mutfakta kesintisiz ilerle.")
+                            Text("Tariflerini planla, ölçüleri otomatik hesapla ve mutfağını tek yerden yönet.")
                                 .multilineTextAlignment(.center)
                                 .foregroundStyle(.secondary)
                         }
@@ -28,10 +28,12 @@ struct PremiumView: View {
 
                     GlassCard {
                         VStack(alignment: .leading, spacing: 12) {
-                            Label("Sınırsız tarif görüntüleme", systemImage: "infinity")
-                            Label("Reklamsız kullanım", systemImage: "nosign")
-                            Label("Ödüllü reklam beklemeden tarif açma", systemImage: "bolt.fill")
-                            Label("Tüm tarif kütüphanesine kesintisiz erişim", systemImage: "books.vertical.fill")
+                            premiumFeature("Sınırsız ayrıntılı tarif", "infinity")
+                            premiumFeature("Tamamen reklamsız kullanım", "nosign")
+                            premiumFeature("Haftalık yemek planı", "calendar.badge.checkmark")
+                            premiumFeature("Otomatik alışveriş listesi", "cart.fill")
+                            premiumFeature("Porsiyona göre ölçü hesaplama", "person.2.fill")
+                            premiumFeature("Eksik malzeme ve zorluk filtreleri", "line.3.horizontal.decrease.circle.fill")
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -42,7 +44,8 @@ struct PremiumView: View {
                                 .font(.headline)
                             Label("Her gün 1 ücretsiz tarif detayı", systemImage: "1.circle.fill")
                             Label("Reklam izleyerek ek tarif hakkı", systemImage: "play.rectangle.fill")
-                            Label("Malzeme arama, öneriler ve favoriler", systemImage: "checkmark.circle.fill")
+                            Label("Sınırsız arama, öneri ve favori", systemImage: "checkmark.circle.fill")
+                            Label("Temel kiler ve süre filtresi", systemImage: "cabinet.fill")
                         }
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
@@ -83,5 +86,9 @@ struct PremiumView: View {
             }
         }
         .navigationTitle("Premium")
+    }
+
+    private func premiumFeature(_ title: String, _ symbol: String) -> some View {
+        Label(title, systemImage: symbol)
     }
 }

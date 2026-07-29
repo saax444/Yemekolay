@@ -10,6 +10,9 @@ struct SettingsView: View {
                     NavigationLink("Yemekolay Premium") {
                         PremiumView()
                     }
+                    NavigationLink("Mutfak Planım") {
+                        KitchenHubView()
+                    }
                 }
 
                 Section("Yasal") {
